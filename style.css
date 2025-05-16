@@ -57,7 +57,8 @@ html, body {
 }
 
 .css3d-footer {
-    width: 400px;
+    width: 100%; /* Changed from 400px */
+    max-width: 400px; /* Added to maintain desktop appearance */
     font-size: 1.5px;
     background: rgba(0,0,0,0.5);
     padding: 8px 15px;

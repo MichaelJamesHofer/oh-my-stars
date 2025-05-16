@@ -56,53 +56,62 @@ html, body {
     font-size: 1em;
 }
 
-.css3d-footer {
-    width: 100%; 
-    max-width: 400px; /* This might need to be 100% or unset for a full-width fixed footer */
-    font-size: 0.8em; 
-    background: rgba(0,0,0,0.8); /* Slightly more opaque background */
-    padding: 10px 15px; 
+/* Renamed from .css3d-footer to .site-footer */
+.site-footer {
+    /* Base styles (some might have been from .css3d-element) */
+    color: #fff; /* Default text color */
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
     box-sizing: border-box;
-    border-radius: 8px 8px 0 0; /* Rounded top corners */
+
+    /* Layout and appearance */
+    width: 100%; 
+    max-width: 400px; 
+    font-size: 0.8em; 
+    background: rgba(0,0,0,0.8); 
+    padding: 10px 15px; 
+    border-radius: 8px 8px 0 0; 
     height: auto;  
 
-    /* New styles for fixed positioning and fade effect */
+    /* Fixed positioning and fade effect */
     position: fixed;
     bottom: 0;
-    left: 50%; /* Start for centering with transform */
-    transform: translateX(-50%); /* Center the 400px max-width block */
-    z-index: 1000; /* Ensure it's on top */
-    opacity: 0; /* Initially invisible */
-    pointer-events: none; /* Initially not interactive */
-    transition: opacity 0.5s ease-in-out; /* Fade transition */
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 1000; 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.5s ease-in-out; 
 }
 
-.css3d-footer nav {
+.site-footer nav { /* Updated selector */
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-bottom: 8px;
 }
 
-.css3d-footer nav a {
+.site-footer nav a { /* Updated selector */
     color: #ccc;
     text-decoration: none;
     transition: color 0.3s ease;
-    pointer-events: auto; /* Allow clicks on links */
+    pointer-events: auto; /* Allow clicks on links inside the footer */
 }
 
-.css3d-footer nav a:hover {
+.site-footer nav a:hover { /* Updated selector */
     color: #fff;
 }
 
-.css3d-footer p {
+.site-footer p { /* Updated selector */
     margin: 0;
-    font-size: 0.8em;
+    font-size: 0.8em; /* This is relative to .site-footer's 0.8em, so it becomes 0.8 * 0.8 = 0.64em. Consider making absolute or 1em. */
     color: #aaa;
 }
 
-/* Glow effect classes */
-.css3d-header h1, .css3d-footer nav a {
+/* Glow effect classes - assuming .glow-char is still used inside footer */
+/* .css3d-header h1, .site-footer nav a { (original was .css3d-footer nav a) */
+/* This rule might need adjustment if .site-footer nav a is the only thing to de-text-shadow */
+.css3d-header h1, .site-footer nav a {
     text-shadow: none;
     transition: text-shadow 0.3s ease;
 }
@@ -137,26 +146,26 @@ html, body {
 }
 
 /* Update footer content styles */
-.footer-content {
+.footer-content { /* Assuming this is a child of .site-footer now */
     display: flex;
     justify-content: space-between;
     gap: 20px;
     margin-bottom: 4px;
 }
 
-.footer-brand {
+.footer-brand { /* Assuming this is a child of .site-footer now */
     flex: 1;
     text-align: left;
 }
 
-.footer-brand h2 {
-    font-size: 16px;
+.footer-brand h2 { /* Assuming this is a child of .site-footer now */
+    font-size: 16px; /* Consider using ems for scalability with parent */
     margin: 0 0 8px 0;
     color: #fff;
 }
 
-.footer-brand p {
-    font-size: 12px;
+.footer-brand p { /* Assuming this is a child of .site-footer now */
+    font-size: 12px; /* Consider using ems */
     line-height: 1.4;
     color: #aaa;
     margin: 0;
@@ -235,8 +244,8 @@ html, body {
     text-decoration-color: #fff;
 }
 
-.copyright {
-    font-size: 10px;
+.copyright { /* Assuming this is a child of .site-footer now */
+    font-size: 10px; /* Consider using ems */
     color: #666;
     text-align: center;
     border-top: 1px solid rgba(255,255,255,0.1);

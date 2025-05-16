@@ -40,13 +40,7 @@ export function createHeaderElement() {
 
 export function createFooterElement() {
     const footerDiv = document.createElement('div');
-    footerDiv.className = 'css3d-element css3d-footer';
-    footerDiv.style.width = 'auto';
-    footerDiv.style.fontSize = '1.5px';
-    footerDiv.style.background = 'rgba(0,0,0,0.5)';
-    footerDiv.style.padding = '6px 15px';
-    footerDiv.style.boxSizing = 'border-box';
-    footerDiv.style.height = '42px';
+    footerDiv.className = 'site-footer';
     
     // Split navigation links into two arrays
     const halfLength = Math.ceil(footerConfig.navigation.links.length / 2);

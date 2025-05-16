@@ -105,7 +105,7 @@ function animate() {
     // Footer fade-in logic
     // Define a threshold for being "at the bottom"
     // camera.position.y will be close to clampMinY when at the bottom.
-    const atBottomThreshold = clampMinY + (cameraViewHeight * 0.1); // e.g., within 10% of camera view height from the absolute bottom
+    const atBottomThreshold = clampMinY + (cameraViewHeight * 0.25); // Increased threshold to 25% of camera view height
     if (camera.position.y <= atBottomThreshold) {
         footerDiv.style.opacity = '1';
         footerDiv.style.pointerEvents = 'auto';

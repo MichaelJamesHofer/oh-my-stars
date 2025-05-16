@@ -25,7 +25,7 @@ html, body {
     top: 44px; /* Height of header */
     left: 0;
     width: 100%;
-    height: calc(100% - 44px - 38px); /* Subtract header and footer heights */
+    height: calc(100% - 44px); /* Subtract header height only */
     display: block;
     z-index: 1; /* Base layer */
 }

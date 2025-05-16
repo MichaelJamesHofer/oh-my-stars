@@ -52,7 +52,7 @@ scene.add(headerObj);
 // Replace footer creation with:
 const footerDiv = createFooterElement();
 const footerObj = new CSS3DObject(footerDiv);
-footerObj.position.set(0, minY - paddingY + 15, 0);
+footerObj.position.set(0, minY - paddingY + 30, 0);
 footerObj.rotation.set(0, 0, 0);
 scene.add(footerObj);
 
@@ -100,7 +100,8 @@ function animate() {
     }
     // Clamp camera based on POI positions, not header/footer
     const cameraViewHeight = camera.top - camera.bottom;
-    const clampMinY = Math.min(minY, maxY) + cameraViewHeight / 2 - paddingY;
+    const footerClearance = 60; // Extra room for footer, adjust as needed
+    const clampMinY = Math.min(minY, maxY) + cameraViewHeight / 2 - paddingY - footerClearance;
     const clampMaxY = Math.max(minY, maxY) - cameraViewHeight / 2 + paddingY;
     camera.position.y = Math.max(clampMinY, Math.min(clampMaxY, camera.position.y));
 

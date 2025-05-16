@@ -59,12 +59,12 @@ html, body {
 .css3d-footer {
     width: 100%; /* Changed from 400px */
     max-width: 400px; /* Added to maintain desktop appearance */
-    font-size: 1.5px;
+    font-size: 0.8em; /* Changed from 1.5px for responsiveness */
     background: rgba(0,0,0,0.5);
-    padding: 8px 15px;
+    padding: 10px 15px; /* Adjusted padding */
     box-sizing: border-box;
     border-radius: 8px;
-    height: 45px;  /* Match the new height */
+    height: auto;  /* Changed from 45px for responsiveness */
 }
 
 .css3d-footer nav {

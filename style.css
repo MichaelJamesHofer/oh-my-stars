@@ -23,9 +23,11 @@ html, body {
 #bg {
     position: absolute;
     top: 44px; /* Height of header */
+    top: 0;
     left: 0;
     width: 100%;
     height: calc(100% - 44px - 38px); /* Subtract header and footer heights */
+    height: 100%;
     display: block;
     z-index: 1; /* Base layer */
 }

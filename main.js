@@ -49,12 +49,9 @@ headerObj.position.set(0, maxY + paddingY - headerWorldHeight / 2, 0);
 headerObj.rotation.set(0, 0, 0);
 scene.add(headerObj);
 
-// Replace footer creation with:
+// Footer handling refactored for fixed positioning and fade-in
 const footerDiv = createFooterElement();
-const footerObj = new CSS3DObject(footerDiv);
-footerObj.position.set(0, minY - paddingY + 30, 0);
-footerObj.rotation.set(0, 0, 0);
-scene.add(footerObj);
+appContainer.appendChild(footerDiv); // Append directly to appContainer
 
 // Update glow effect handler for both header and footer
 const handleGlowEffect = (element, e) => {
@@ -98,12 +95,24 @@ function animate() {
         camera.position.y += scrollState.velocity;
         scrollState.velocity *= SCROLL_DAMPING;
     }
-    // Clamp camera based on POI positions, not header/footer
+    // Clamp camera based on POI positions
     const cameraViewHeight = camera.top - camera.bottom;
-    const footerClearance = 60; // Extra room for footer, adjust as needed
+    const footerClearance = 60; // Extra room for footer logic
     const clampMinY = Math.min(minY, maxY) + cameraViewHeight / 2 - paddingY - footerClearance;
     const clampMaxY = Math.max(minY, maxY) - cameraViewHeight / 2 + paddingY;
     camera.position.y = Math.max(clampMinY, Math.min(clampMaxY, camera.position.y));
+
+    // Footer fade-in logic
+    // Define a threshold for being "at the bottom"
+    // camera.position.y will be close to clampMinY when at the bottom.
+    const atBottomThreshold = clampMinY + (cameraViewHeight * 0.1); // e.g., within 10% of camera view height from the absolute bottom
+    if (camera.position.y <= atBottomThreshold) {
+        footerDiv.style.opacity = '1';
+        footerDiv.style.pointerEvents = 'auto';
+    } else {
+        footerDiv.style.opacity = '0';
+        footerDiv.style.pointerEvents = 'none';
+    }
 
     // No need to update projection matrix here unless zoom changes
     // camera.updateProjectionMatrix();
@@ -132,13 +141,10 @@ function animate() {
         currentInfoBox.style.top = `${screenY}px`;
     }
 
-    // Keep header/footer in correct X/Z, but let them scroll with the scene
+    // Keep header in correct X/Z, but let them scroll with the scene
     headerObj.position.x = 0;
     headerObj.position.z = 0;
     headerObj.position.y = maxY + paddingY - headerWorldHeight / 2;
-    footerObj.position.x = 0;
-    footerObj.position.z = 0;
-    footerObj.position.y = minY - paddingY + 30;
 
     // Render
     renderer.render(scene, camera); // Render WebGL scene
@@ -181,6 +187,9 @@ function onWindowResize() {
 
     renderer.setSize(canvasWidth, canvasHeight); // Resize WebGL renderer
     cssRenderer.setSize(canvasWidth, canvasHeight); // Resize CSS3D renderer
+
+    // Update header position on resize (in case POI Y changes)
+    headerObj.position.y = maxY + paddingY - headerWorldHeight / 2;
 
     // Update header/footer positions on resize (in case POI Y changes)
     headerObj.position.y = maxY + paddingY - headerWorldHeight / 2;

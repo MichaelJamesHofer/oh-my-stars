@@ -57,14 +57,24 @@ html, body {
 }
 
 .css3d-footer {
-    width: 100%; /* Changed from 400px */
-    max-width: 400px; /* Added to maintain desktop appearance */
-    font-size: 0.8em; /* Changed from 1.5px for responsiveness */
-    background: rgba(0,0,0,0.5);
-    padding: 10px 15px; /* Adjusted padding */
+    width: 100%; 
+    max-width: 400px; /* This might need to be 100% or unset for a full-width fixed footer */
+    font-size: 0.8em; 
+    background: rgba(0,0,0,0.8); /* Slightly more opaque background */
+    padding: 10px 15px; 
     box-sizing: border-box;
-    border-radius: 8px;
-    height: auto;  /* Changed from 45px for responsiveness */
+    border-radius: 8px 8px 0 0; /* Rounded top corners */
+    height: auto;  
+
+    /* New styles for fixed positioning and fade effect */
+    position: fixed;
+    bottom: 0;
+    left: 50%; /* Start for centering with transform */
+    transform: translateX(-50%); /* Center the 400px max-width block */
+    z-index: 1000; /* Ensure it's on top */
+    opacity: 0; /* Initially invisible */
+    pointer-events: none; /* Initially not interactive */
+    transition: opacity 0.5s ease-in-out; /* Fade transition */
 }
 
 .css3d-footer nav {

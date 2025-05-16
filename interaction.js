@@ -287,10 +287,42 @@ export function setupClickHandler(poiObjects) {
 
 // Scroll event
 export function setupScrollHandler() {
+    // Mouse wheel scrolling
     window.addEventListener('wheel', (e) => {
         e.preventDefault(); // Prevent default browser scroll
         scrollState.velocity -= e.deltaY * 0.01;
     }, { passive: false }); // Set passive to false so preventDefault works
+
+    // Touch scrolling
+    let lastTouchY = null;
+    let touchScrollMultiplier = 0.05; // Adjust this for touch sensitivity
+
+    window.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) { // Single touch for scrolling
+            lastTouchY = e.touches[0].clientY;
+            // Optionally, could slightly reduce existing velocity on new touch to feel more controlled
+            // scrollState.velocity *= 0.8;
+        }
+    }, { passive: false });
+
+    window.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1 && lastTouchY !== null) {
+            e.preventDefault(); // Prevent default browser scroll/bounce
+            const deltaY = e.touches[0].clientY - lastTouchY;
+            scrollState.velocity += deltaY * touchScrollMultiplier; // Inverted compared to wheel deltaY
+            lastTouchY = e.touches[0].clientY;
+        }
+    }, { passive: false });
+
+    window.addEventListener('touchend', (e) => {
+        lastTouchY = null;
+        // The existing damping in main.js animate loop will handle the slowdown
+    });
+
+    window.addEventListener('touchcancel', (e) => {
+        lastTouchY = null;
+        // Consider if velocity should be reset or managed here too
+    });
 }
 
 // Resize event
